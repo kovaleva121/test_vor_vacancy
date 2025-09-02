@@ -11,6 +11,7 @@ class Artist(models.Model):
         verbose_name_plural = 'Исполнители'
 
     def __str__(self):
+        """Строковое отображение"""
         return f'{self.first_name} {self.last_name}'
 
 
@@ -22,10 +23,12 @@ class Album(models.Model):
     release_year = models.PositiveIntegerField(verbose_name='Год выпуска', help_text='Укажите год выпуска')
 
     class Meta:
+        """Метаданные"""
         verbose_name = 'Альбом'
         verbose_name_plural = 'Альбомы'
 
     def __str__(self):
+        """Строковое отображение"""
         return f'{self.performer}, {self.release_year}'
 
 
@@ -36,10 +39,12 @@ class Song(models.Model):
                                     help_text='Укажите альбомы')
 
     class Meta:
+        """Метаданные"""
         verbose_name = 'Песня'
         verbose_name_plural = 'Песни'
 
     def __str__(self):
+        """Строковое отображение"""
         return self.title
 
 
@@ -51,9 +56,11 @@ class Track(models.Model):
                                                help_text='Укажите порядковый номер')
 
     class Meta:
+        """Метаданные"""
         verbose_name = 'Трек'
         verbose_name_plural = 'Треки'
         unique_together = [["album", "track_number"], ["album", "song"]]
 
     def __str__(self):
+        """Строковое отображение"""
         return f"{self.track_number}. {self.song.title} - {self.album.title}"

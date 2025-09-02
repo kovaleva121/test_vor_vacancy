@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -16,8 +15,10 @@ class Migration(migrations.Migration):
             name='Artist',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(help_text='Укажите имя исполнителя', max_length=100, verbose_name='Имя')),
-                ('last_name', models.CharField(help_text='Укажите фамилию исполнителя', max_length=150, verbose_name='Фамилия')),
+                ('first_name',
+                 models.CharField(help_text='Укажите имя исполнителя', max_length=100, verbose_name='Имя')),
+                ('last_name',
+                 models.CharField(help_text='Укажите фамилию исполнителя', max_length=150, verbose_name='Фамилия')),
             ],
             options={
                 'verbose_name': 'Исполнитель',
@@ -28,7 +29,8 @@ class Migration(migrations.Migration):
             name='Song',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(help_text='Укажите название песни', max_length=250, verbose_name='Название песни')),
+                ('title',
+                 models.CharField(help_text='Укажите название песни', max_length=250, verbose_name='Название песни')),
             ],
             options={
                 'verbose_name': 'Песня',
@@ -39,9 +41,14 @@ class Migration(migrations.Migration):
             name='Album',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(help_text='Напишите название альбома', max_length=255, verbose_name='Название альбома')),
-                ('release_year', models.PositiveIntegerField(help_text='Укажите год выпуска', verbose_name='Год выпуска')),
-                ('artist', models.ForeignKey(help_text='Укажите исполнителя альбома', on_delete=django.db.models.deletion.CASCADE, related_name='albums', to='songs.artist', verbose_name='Исполнитель')),
+                ('title', models.CharField(help_text='Напишите название альбома', max_length=255,
+                                           verbose_name='Название альбома')),
+                ('release_year',
+                 models.PositiveIntegerField(help_text='Укажите год выпуска', verbose_name='Год выпуска')),
+                ('artist',
+                 models.ForeignKey(help_text='Укажите исполнителя альбома',
+                                   on_delete=django.db.models.deletion.CASCADE,
+                                   related_name='albums', to='songs.artist', verbose_name='Исполнитель')),
             ],
             options={
                 'verbose_name': 'Альбом',
@@ -52,9 +59,13 @@ class Migration(migrations.Migration):
             name='Track',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('track_number', models.PositiveIntegerField(help_text='Укажите порядковый номер', verbose_name='Порядковый номер в альбоме')),
-                ('album', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='songs.album', verbose_name='Альбом')),
-                ('song', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='songs.song', verbose_name='Песня')),
+                ('track_number', models.PositiveIntegerField(help_text='Укажите порядковый номер',
+                                                             verbose_name='Порядковый номер в альбоме')),
+                ('album', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='songs.album',
+                                            verbose_name='Альбом')),
+                ('song',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='songs.song',
+                                   verbose_name='Песня')),
             ],
             options={
                 'verbose_name': 'Трек',
@@ -65,6 +76,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='song',
             name='albums',
-            field=models.ManyToManyField(help_text='Укажите альбомы', related_name='songs', through='songs.Track', to='songs.album', verbose_name='Альбомы'),
+            field=models.ManyToManyField(help_text='Укажите альбомы', related_name='songs', through='songs.Track',
+                                         to='songs.album', verbose_name='Альбомы'),
         ),
     ]

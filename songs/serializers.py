@@ -46,7 +46,7 @@ class TrackSerializer(serializers.ModelSerializer):
     album = AlbumSerializer(read_only=True)
     album_id = serializers.PrimaryKeyRelatedField(
         queryset=Album.objects.all(),
-        source='almum',
+        source='album',
         write_only=True
     )
 
